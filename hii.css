@@ -1,0 +1,29 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+h1{
+    background-color: magenta;
+    text-align: center;
+    padding: 20px;
+    margin-left: 400px;
+    margin-right: 400px;
+    border-radius: 100px;
+}
+
+h2{
+    margin-top: 60px;
+    text-align: center;
+    color: violet;
+}
+
+.first{
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+.second{
+    margin-left: 40px;
+    font-size: 20px;
+}
