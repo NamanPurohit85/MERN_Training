@@ -1,6 +1,5 @@
 body{
-    background-color: black;
-    color: white;
+    background: linear-gradient(to left, rgba(238, 59, 163, 0.265), rgb(36, 100, 210))
 }
 
 h1{
@@ -15,7 +14,7 @@ h1{
 h2{
     margin-top: 60px;
     text-align: center;
-    color: violet;
+    color: white;
 }
 
 .first{
