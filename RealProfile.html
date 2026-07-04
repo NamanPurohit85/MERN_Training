@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+      }
+      :root {
+        --primary: rgb(22, 103, 209);
+      }
+      article:hover {
+        transform: scale(1.04);
+      }
+      .profile-card {
+        margin-top: 30px;
+        width: 300px;
+        padding: 20px;
+        background-color: var(--primary);
+        border-radius: 12px;
+        box-shadow: 15px 15px 10px rgba(0, 0, 0, 0.957);
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
+      img {
+        border-radius: 50%;
+      }
+      @media (max-width: 480px) {
+        .profile-card div {
+          flex-direction: column;
+          text-align: center;
+        }
+        img {
+          width: 70px;
+          height: 70px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article class="profile-card">
+      <div>
+        <h2>Naman Purohit</h2>
+        <img
+          src="https://www.bing.com/th/id/OIP.rQeqEJ4PlccEwEnwub7eEAHaHw?w=193&h=202&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=ImgAns&rm=2"
+          alt=""
+          height="100px"
+          width="100px"
+        />
+      </div>
+    </article>
+  </body>
+</html>
