@@ -50,7 +50,9 @@ function Signup() {
 
           <br />
 
-          <button type="submit">Create Account</button>
+          <button type="submit">
+            <Link to="/login">Create Account</Link>
+          </button>
 
           <p>Or register with</p>
 

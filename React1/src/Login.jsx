@@ -45,7 +45,7 @@ const Login = () => {
 
           <br />
 
-          <button type="submit">Log In</button>
+          <button type="submit"><Link to="/home">Login</Link></button>
 
           <p>Or Login with</p>
 
