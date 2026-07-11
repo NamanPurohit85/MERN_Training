@@ -5,13 +5,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
+/* body {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #6b658f;
-}
+} */
 
 .container {
   width: 1000px;

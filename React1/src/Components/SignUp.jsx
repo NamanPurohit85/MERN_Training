@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../index.css";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Signup() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/login");
+  };
+
   return (
     <div className="container">
       <div className="left">
@@ -25,29 +33,34 @@ const Login = () => {
       </div>
 
       <div className="right">
-        <h1>Welcome Back</h1>
+        <h1>Create an Account</h1>
 
         <p>
-          Don&apos;t have an account? <Link to="/signup">Sign up</Link>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
 
-        <form>
-          <input type="email" placeholder="Email" />
+        <form onSubmit={handleSubmit}>
+          <div className="name">
+            <input type="text" placeholder="First name" required />
+            <input type="text" placeholder="Last name" required />
+          </div>
+
+          <input type="email" placeholder="Email" required />
 
           <div className="password-box">
-            <input type="password" placeholder="Enter your password" />
+            <input type="password" placeholder="Enter your password" required />
           </div>
 
           <label htmlFor="check">
-            <input type="checkbox" id="check" /> I agree to the{" "}
+            <input type="checkbox" id="check" required /> I agree to the{" "}
             <a href="#">Terms &amp; Conditions</a>
           </label>
 
           <br />
 
-          <button type="submit"><Link to="/home">Login</Link></button>
+          <button type="submit">Create Account</button>
 
-          <p>Or Login with</p>
+          <p>Or register with</p>
 
           <div className="social">
             <button type="button">Google</button>
@@ -57,6 +70,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Login;
+export default Signup;

@@ -1,7 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "../index.css";
+import { Link, useNavigate } from "react-router-dom";
 
-function Signup() {
+const Login = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/home");
+  };
+
   return (
     <div className="container">
       <div className="left">
@@ -25,22 +33,17 @@ function Signup() {
       </div>
 
       <div className="right">
-        <h1>Create an Account</h1>
+        <h1>Welcome Back</h1>
 
         <p>
-          Already have an account? <Link to="/login">Log in</Link>
+          Don&apos;t have an account? <Link to="/signup">Sign up</Link>
         </p>
 
-        <form>
-          <div className="name">
-            <input type="text" placeholder="First name" />
-            <input type="text" placeholder="Last name" />
-          </div>
-
-          <input type="email" placeholder="Email" />
+        <form onSubmit={handleSubmit}>
+          <input type="email" placeholder="Email" required />
 
           <div className="password-box">
-            <input type="password" placeholder="Enter your password" />
+            <input type="password" placeholder="Enter your password" required />
           </div>
 
           <label htmlFor="check">
@@ -50,11 +53,9 @@ function Signup() {
 
           <br />
 
-          <button type="submit">
-            <Link to="/login">Create Account</Link>
-          </button>
+          <button type="submit">Login</button>
 
-          <p>Or register with</p>
+          <p>Or Login with</p>
 
           <div className="social">
             <button type="button">Google</button>
@@ -64,6 +65,6 @@ function Signup() {
       </div>
     </div>
   );
-}
+};
 
-export default Signup;
+export default Login;
