@@ -1,0 +1,32 @@
+body{
+    background: linear-gradient(to left, rgba(238, 59, 163, 0.265), rgb(36, 100, 210))
+}
+
+h1{
+    background-color: magenta;
+    text-align: center;
+    padding: 20px;
+    margin-left: 400px;
+    margin-right: 400px;
+    border-radius: 100px;
+}
+
+h2{
+    margin-top: 60px;
+    text-align: center;
+    color: white;
+}
+
+h3{
+    padding: 20px;
+}
+
+.first{
+    margin-left: 40px;
+    font-size: 20px;
+}
+
+.second{
+    margin-left: 40px;
+    font-size: 20px;
+}
