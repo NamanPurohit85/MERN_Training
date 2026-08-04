@@ -50,7 +50,6 @@ const productSchema = mongoose.Schema({
     type: Number,
     min: 10,
     required: true,
-    trim: true,
   },
   category: {
     type: String,

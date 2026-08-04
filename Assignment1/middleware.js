@@ -1,16 +1,26 @@
 const jwt = require("jsonwebtoken");
-const secret = "Naman_Purohit_21";
+require("dotenv").config();
+const secret = process.env.secret;
 const checkToken = (req, res, next) => {
-  const token = req.cookies.token;
-  console.log(token);
+  try {
+    const token = req.cookies.token;
 
-  if (!token) {
-    return res.json({ message: "Your cookie is Expired" });
+    if (!token) {
+      return res.status(401).json({
+        message: "No token found",
+      });
+    }
+
+    const user = jwt.verify(token, secret);
+
+    req.user = user;
+
+    next();
+  } catch (error) {
+    return res.status(401).json({
+      message: "Invalid or expired token",
+    });
   }
-  const user = jwt.verify(token, secret);
-  req.user = user;
-
-  next();
 };
 
 module.exports = checkToken;
