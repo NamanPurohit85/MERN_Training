@@ -1,3 +1,4 @@
+// product.js
 const {
   createProductService,
   getAllProductService,
@@ -8,11 +9,8 @@ const {
 
 const createProduct = async (req, res) => {
   const { name, SKU, description, price, category } = req.body;
-  if (!name || !SKU || !description || !price || !category) {
-    return res.json({ message: "all informations are required" });
-  }
   try {
-    const product = createProductService({
+    const product = await createProductService({
       name,
       SKU,
       description,
@@ -23,46 +21,56 @@ const createProduct = async (req, res) => {
       .status(201)
       .json({ message: "Product successfully created", product });
   } catch (error) {
-    return res.status(500).json({ message: "cannot create product", error });
+    return res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Cannot create product" });
   }
 };
 
 const getAllProduct = async (req, res) => {
   try {
-    const allProduct = getAllProductService();
+    const allProduct = await getAllProductService();
     return res.status(200).json({ allProduct });
   } catch (error) {
-    return res.status(500).json({ message: "not get any product", error });
+    return res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Cannot get products" });
   }
 };
 
 const getProductById = async (req, res) => {
   let id = req.params.id;
   try {
-    const product = getProductByIdService(id);
+    const product = await getProductByIdService(id);
     return res.status(200).json({ product });
   } catch (error) {
-    return res.status(500).json({ message: "Cannot get product" });
+    return res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Cannot get product" });
   }
 };
 
 const updateProduct = async (req, res) => {
   let id = req.params.id;
   try {
-    const product = updateProductService(id, req.body);
+    const product = await updateProductService(id, req.body);
     return res.status(200).json({ message: "After update", product });
   } catch (error) {
-    return res.status(500).json({ message: "Cannot update", error });
+    return res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Cannot update" });
   }
 };
 
 const deleteProduct = async (req, res) => {
   let id = req.params.id;
   try {
-    let product = deleteProductService(id);
+    let product = await deleteProductService(id);
     return res.status(200).json({ message: "Deleted successfully", product });
   } catch (error) {
-    return res.status(500).json({ message: "cannot delete", error });
+    return res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Cannot delete" });
   }
 };
 

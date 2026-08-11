@@ -9,7 +9,7 @@ const registerUserService = async ({ name, email, password }) => {
     error.statusCode = 409;
     throw error;
   }
-  let hashPassword = await bcrypt.hash(password, process.env.salt);
+  let hashPassword = await bcrypt.hash(password, 10);
 
   user = await userModel.create({
     name,
@@ -32,14 +32,33 @@ const loginUserService = async ({ email, password }) => {
     error.statusCode = 401;
     throw error;
   }
-  const token = jwt.sign(
-    { name: user.name, email: user.email },
-    process.env.secret,
-    {
-      expiresIn: "5h",
-    },
-  );
+  const token = jwt.sign({ id: user._id }, process.env.secret, {
+    expiresIn: "5h",
+  });
   return { user, token };
 };
 
-module.exports = { registerUserService, loginUserService };
+const updateUserRoleService = async (id, role) => {
+  const allowedRoles = ["user", "seller", "admin"];
+  if (!allowedRoles.includes(role)) {
+    const error = new Error("Invalid role");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const updatedUser = await userModel.findByIdAndUpdate(
+    id,
+    { role },
+    { new: true, runValidators: true },
+  );
+
+  if (!updatedUser) {
+    const error = new Error("User not found");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  return updatedUser;
+};
+
+module.exports = { registerUserService, loginUserService, updateUserRoleService };
