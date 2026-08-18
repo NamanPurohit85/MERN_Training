@@ -1,7 +1,7 @@
 const {
   registerUserService,
   loginUserService,
-  updateUserRoleService
+  updateUserRoleService,
 } = require("../Services/userService");
 
 const registerUser = async (req, res) => {
@@ -41,12 +41,15 @@ const loginUser = async (req, res) => {
   }
 
   try {
-    const { user, token } = await loginUserService({
+    const { user, accessToken, refreshToken } = await loginUserService({
       email,
       password,
     });
 
-    res.cookie("token", token, {
+    res.cookie("accessToken", accessToken, {
+      httpOnly: true,
+    });
+    res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
     });
 

@@ -24,4 +24,18 @@ router.patch(
 );
 router.get("/logout", checkToken, logoutUser);
 
+//refreshToekn API
+router.get("/refreshToken", async (req, res) => {
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) {
+      return res.status(401).json({
+        message: "Refresh token Not found",
+      });
+    }
+  } catch (error) {
+    return res.end(error);
+  }
+});
+
 module.exports = router;

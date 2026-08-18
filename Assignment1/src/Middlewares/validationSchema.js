@@ -23,9 +23,22 @@ const updateProductSchema = productSchema.fork(
   ["name", "SKU", "description", "price", "category"],
   (field) => field.optional(),
 );
+
+const addressValidationSchema = joi.object({
+  type: joi.string().valid("Home", "Office", "Billing", "Shipping"),
+  street: joi.string().min(2).max(40).required(),
+  city: joi.string().min(2).max(40).required(),
+  state: joi.string().min(2).max(40).required(),
+  country: joi.string().min(2).max(40).required(),
+  pincode: joi.number().required(),
+  longitude: joi.number().min(-180).max(180),
+  latitude: joi.number().min(-90).max(90),
+}).and("longitude", "latitude"); // if one is given, both must be
+
 module.exports = {
   registerSchema,
   loginSchema,
   productSchema,
   updateProductSchema,
+  addressValidationSchema,
 };

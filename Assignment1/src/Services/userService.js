@@ -32,10 +32,16 @@ const loginUserService = async ({ email, password }) => {
     error.statusCode = 401;
     throw error;
   }
-  const token = jwt.sign({ id: user._id }, process.env.secret, {
-    expiresIn: "5h",
+  // const token = jwt.sign({ id: user._id }, process.env.secret, {
+  //   expiresIn: "5h",
+  // });
+  const accessToken = jwt.sign({ id: user._id }, process.env.access_key, {
+    expiresIn: "30s",
   });
-  return { user, token };
+  const refreshToken = jwt.sign({ id: user._id }, process.env.refresh_key, {
+    expiresIn: "7d",
+  });
+  return { user, accessToken, refreshToken };
 };
 
 const updateUserRoleService = async (id, role) => {
@@ -61,4 +67,8 @@ const updateUserRoleService = async (id, role) => {
   return updatedUser;
 };
 
-module.exports = { registerUserService, loginUserService, updateUserRoleService };
+module.exports = {
+  registerUserService,
+  loginUserService,
+  updateUserRoleService,
+};
