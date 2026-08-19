@@ -8,6 +8,8 @@ const createReviewSchema = Joi.object({
   rating: Joi.number().integer().min(1).max(5).required(),
 
   reviewerName: Joi.string().trim().min(2).max(50).required(),
+}).options({
+  stripUnknown: true,
 });
 
 const getReviewsSchema = Joi.object({
@@ -34,7 +36,11 @@ const updateReviewSchema = Joi.object({
   rating: Joi.number().integer().min(1).max(5),
 
   reviewerName: Joi.string().trim().min(2).max(50),
-}).min(1);
+})
+  .min(1)
+  .options({
+    stripUnknown: true,
+  });
 
 module.exports = {
   createReviewSchema,
