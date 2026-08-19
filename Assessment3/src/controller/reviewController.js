@@ -1,54 +1,38 @@
 const reviewService = require("../service/reviewService");
 
-const createReview = async (req, res, next) => {
+const createReview = async (req, res) => {
   try {
     const review = await reviewService.createReview(req.body);
-    res.status(201).json({ success: true, message: "Review created", data: review });
+    res.status(201).send({
+      success: true,
+      message: "Review created successfully",
+      data: review,
+    });
   } catch (err) {
-    next(err);
+    res.status(500).send({
+      success: false,
+      message: err.message,
+    });
   }
 };
 
-const getReviews = async (req, res, next) => {
+const getReviews = async (req, res) => {
   try {
-    const result = await reviewService.getReviews();
-    res.status(200).json({ success: true, message: "Reviews fetched", data: result });
+    const reviews = await reviewService.getReviews(req.query);
+    res.status(200).send({
+      success: true,
+      message: "Reviews fetched successfully",
+      data: reviews,
+    });
   } catch (err) {
-    next(err);
-  }
-};
-
-const getReviewById = async (req, res, next) => {
-  try {
-    const review = await reviewService.getReviewById(req.params.id);
-    res.status(200).json({ success: true, message: "Review fetched", data: review });
-  } catch (err) {
-    next(err);
-  }
-};
-
-const updateReview = async (req, res, next) => {
-  try {
-    const review = await reviewService.updateReview(req.params.id, req.body);
-    res.status(200).json({ success: true, message: "Review updated", data: review });
-  } catch (err) {
-    next(err);
-  }
-};
-
-const deleteReview = async (req, res, next) => {
-  try {
-    await reviewService.deleteReview(req.params.id);
-    res.status(200).json({ success: true, message: "Review deleted", data: null });
-  } catch (err) {
-    next(err);
+    res.status(500).send({
+      success: false,
+      message: err.message,
+    });
   }
 };
 
 module.exports = {
   createReview,
   getReviews,
-  getReviewById,
-  updateReview,
-  deleteReview,
 };

@@ -1,6 +1,6 @@
-const validationMiddleware = (schema) => {
+const validationMiddleware = (schema, type = "body") => {
   return (req, res, next) => {
-    const { error, value } = schema.validate(req.body);
+    const { error, value } = schema.validate(req[type]);
 
     if (error) {
       return res.status(400).json({
@@ -9,7 +9,7 @@ const validationMiddleware = (schema) => {
       });
     }
 
-    req.body = value;
+    req[type] = value;
     next();
   };
 };

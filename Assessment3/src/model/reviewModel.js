@@ -4,32 +4,36 @@ const reviewSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
-      minlength: 3,
-      maxlength: 80,
+      required: [true, "Title is required"],
+      minlength: [3, "Title must be at least 3 characters"],
+      maxlength: [80, "Title cannot exceed 80 characters"],
       trim: true,
     },
 
     comment: {
       type: String,
-      required: true,
-      minlength: 10,
-      maxlength: 500,
+      required: [true, "Comment is required"],
+      minlength: [10, "Comment must be at least 10 characters"],
+      maxlength: [500, "Comment cannot exceed 500 characters"],
       trim: true,
     },
 
     rating: {
       type: Number,
-      required: true,
-      min: 1,
-      max: 5,
+      required: [true, "Rating is required"],
+      min: [1, "Rating must be at least 1"],
+      max: [5, "Rating cannot be greater than 5"],
+      validate: {
+        validator: Number.isInteger,
+        message: "Rating must be a whole number",
+      },
     },
 
     reviewerName: {
       type: String,
-      required: true,
-      minlength: 2,
-      maxlength: 50,
+      required: [true, "Reviewer name is required"],
+      minlength: [2, "Reviewer name must be at least 2 characters"],
+      maxlength: [50, "Reviewer name cannot exceed 50 characters"],
       trim: true,
     },
 
@@ -48,7 +52,7 @@ const reviewSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // adds createdAt & updatedAt automatically
+    timestamps: true,
   },
 );
 
